@@ -31,44 +31,17 @@ Executar `catkin_make` após fazer o download do projeto:
 
 Certifique-se de que seus scripts Python são executáveis
 
-    roscd p1_delta
+    roscd p1_nabla
     cd scripts
     chmod a+x *py
 
 Para executar, faça:
 
-    rosrun p1_delta p1_mobilenet.py 
-
-ou 
-
-    rosrun p1_delta p1_yolo.py 
+    rosrun p1_nabla breadcrumbs.py
 
 
 Certifique-se de que seus scripts ROS rodam com Python 2 e têm sempre as linhas a seguir no começo:
 
     #! /usr/bin/env python
     # -*- coding:utf-8 -*-
-
-### cv_camera
-
-A maioria das webcams é o device 0, neste caso, se você tiver o cv_camera instalado:
-
-    rosrun cv_camera cv_camera_node
-
-Também precisamos fazer o relay:
-
-    rosrun topic_tools relay  /cv_camera/image_raw/compressed /kamera
-
-**Atenção:** feche o `rosrun cv_camera cv_camera_node` quando voltar a trabalhar na Questão 1 para não bloquear a webcam.
-
-
-## Imutils
-
-Você vai precisar do `imutils` para usar o Yolo. Para instalar:
-
-    pip install imutils
-
-Ou
-
-    pip3 install imutils
 

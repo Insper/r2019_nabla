@@ -1,6 +1,6 @@
-# r2019_delta
+# r2019_nabla
 
-Robótica 2019 - P1 delta
+Robótica 2019 - P1 Nabla
 
 [Enunciado da prova](enunciado.md)
 
