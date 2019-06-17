@@ -122,7 +122,7 @@ Dicas:
 
 
 |Resultado| Conceito| 
-|---|---|
+|:---------------------------------------|:------:|
 | Não executa | 0 |
 | Encontra máscara que seleciona uma região de interesse (chão, paredes ou teto)  corretamente e mostra a imagem| 1.0 |
 | Encontra as retas corretamente via transformada de Hough | 2.0|
@@ -140,17 +140,17 @@ Vamos trabalhar com o tópico `/imu` , que traz os dados da unidade inercial do 
 Existe um exemplo em que você pode se basear [neste link https://github.com/Insper/robot19/blob/master/ros/exemplos_python/scripts/le_imu.py)](https://github.com/Insper/robot19/blob/master/ros/exemplos_python/scripts/le_imu.py).
 
 
-![](media/eixos_turtle.png)
+![Eixos do robô](media/eixos_turtle.png)
 
 O que você deve fazer: Um programa que detecta que o robô está sendo inclinado para a frente ou para trás, imprime uma mensagem para alertar e move as rodas para tentar desfazer a inclinação.
 
 **Você deve se basear na medida de giroscópio - ângulos de orientação*. Não use a gravidade. 
 
-No simulador, para inclinar o robô use a ferramenta de rotação da barra de ferramentas ![](orientation.png).
+No simulador, para inclinar o robô use a ferramenta de rotação da barra de ferramentas ![Ferramenta rotation](media/orientation.png).
 
 
 |Resultado| Conceito| 
-|---|---|
+|:---------------------------------------|:------:|
 | Não executa | 0 |
 | Identifica a inclinação e imprime mensagem | 1.25 |
 | Quando inclinado, realiza movimento no sentido a cancelar a inclinação| 2.5 |
@@ -172,10 +172,10 @@ Trabalhe sobre o arquivo `breadcrumbs.py`
 
 Depois de andar um pouco com o robô seu resultado deve ficar parecido com o da figura abaixo:
 
-![](media/demo_odometria.png)
+![Exemplo de saida esperada](media/demo_odometria.png)
 
 |Resultado| Conceito| 
-|---|---|
+|:---------------------------------------|:------:|
 | Não executa | 0 |
 | Consegue extrair corretamente os dados do tópico de odometria, imprimindo-os | 1.25 |
 | Apresenta o mapa numa imagem quando o robô é pilotado via *teleop* | 2.5 | 
