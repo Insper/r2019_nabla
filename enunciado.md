@@ -88,7 +88,7 @@ $y_i = m1x_i + h1$
 
 **Dados de teste:**
 
-As retas definidas por pontos $r1: (P_1, P_2)$ e $r2: (Q_1, Q_2)$, para os valores:
+Caso precise testar seu código, você pode conferir com estes valores. As retas definidas por pontos $r1: (P_1, P_2)$ e $r2: (Q_1, Q_2)$, para os valores:
 
 ```python
 
@@ -102,6 +102,7 @@ Encontram-se no ponto `(1.7572 4.8611)`
 
 
 Pede-se: 
+
 * A partir do ponto para onde convergem as linhas do corredor, marque o ponto de fuga no vídeo `hall.mp4`. Você precisa mostrar as retas que vão convergir.
 
 
@@ -152,7 +153,7 @@ O que você deve fazer: Um programa que detecta que o robô está sendo inclinad
 No simulador, para inclinar o robô use a ferramenta de rotação da barra de ferramentas
 
 
-![Ferramenta rotation](media/orientation.png)
+![Ferramenta rotation](media/orientation.png){:height="50%" width="50%"}
 
 
 |Resultado| Conceito| 
