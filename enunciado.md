@@ -22,7 +22,7 @@ Existe algumas dicas de referência rápida de setup [instrucoes_setup.md](instr
 # Questões
 
 
-## Questão 1
+## Questão 1 - OpenCV e Visão
 
 Robôs que trabalham dentro de prédios precisam saber seguir corredores.
 
@@ -84,7 +84,24 @@ $x_i = \frac{h2 - h1}{m1 - m2}$
 
 $y_i = m1x_i + h1$
 
-Pede-se: A partir do ponto para onde convergem as linhas do corredor, marque o ponto de fuga. Você precisa mostrar as retas que vão convergir.
+**Dados de teste:**
+
+As retas definidas por pontos $r1: (P_1, P_2)$ e $r2: (Q_1, Q_2)$, para os valores:
+
+```python
+
+p1 = (3.0, 2.5)
+p2 = (4.0, 0.6)
+q1 = (1.0, 2.4)
+q2 = (0.6, 1.1)
+```
+
+Encontram-se no ponto `(1.7572815533980581 4.861165048543689)`
+
+
+Pede-se: 
+* A partir do ponto para onde convergem as linhas do corredor, marque o ponto de fuga no vídeo `hall.mp4`. Você precisa mostrar as retas que vão convergir.
+
 
 **Sugestão:** 
 
@@ -99,40 +116,45 @@ Lembre-se de que, no espaço de cores HSV, o vermelho se encontra no início e n
 
 Dicas:
 * Lembre-se da aula 2
-* Só precisa funcionar **para esta vídeo em particular**, não para quaisquer toranjas
-* Não é uma questão de ROS. Trabalhe na pasta `p1_webcam`
+* Só precisa funcionar **para este vídeo em particular**, não para qualquer corredor
+* Não é uma questão de ROS. Trabalhe na pasta `q1_opencv`
 * Você pode usar Python 2 ou Python 3 conforme preferir
 
 
 |Resultado| Conceito| 
 |---|---|
 | Não executa | 0 |
-| Seleciona laranjas corretamente e obtém máscara | 1.0 |
-| Conta laranjas | 1.5 |
-| Desenha círculo só sobre as maduras | 2.5 | 
+| Encontra máscara que seleciona uma região de interesse (chão, paredes ou teto)  corretamente e mostra a imagem| 1.0 |
+| Encontra as retas corretamente via transformada de Hough | 2.0|
+| Implementa uma função que dadas as retas definidas por pontos $r1: (P1, P2)$ e $r2: (Q1, Q2)$ encontra o ponto de interseção | 3.0 |
+| Usa a função do item anterior para achar *alguma* interseção baseado nas retas obtidas via *Hough* | 4.0 | 
+| Plota o ponto de fuga corretamente na tela | 5.0 |
 
 Casos intermediários ou omissos da rubrica serão decididos pelo professor.
 
 
-## Questão 2
+## Questão 2 - ROS
 
-Você vai receber uma caixa avermelhada.
+Vamos trabalhar com o tópico `/imu` , que traz os dados da unidade inercial do robô.
 
-Faca um programa que imprime na imagem a distância entre a caixa vermelha e sua webcam.
+Existe um exemplo em que você pode se basear [neste link https://github.com/Insper/robot19/blob/master/ros/exemplos_python/scripts/le_imu.py)](https://github.com/Insper/robot19/blob/master/ros/exemplos_python/scripts/le_imu.py).
 
-Você pode assumir que a caixa é mantida sempre na vertical
 
-Assuma que a resolućão da webcam é `640 x 480`  e que a imagem abaixo foi obtida com a caixa a uma distância de 100cm da webcam.
+![](media/eixos_turtle.png)
 
-![](caixa_calibracao.png)
+O que você deve fazer: Um programa que detecta que o robô está sendo inclinado para a frente ou para trás, imprime uma mensagem para alertar e move as rodas para tentar desfazer a inclinação.
+
+**Você deve se basear na medida de giroscópio - ângulos de orientação*. Não use a gravidade. 
+
+No simulador, para inclinar o robô use a ferramenta de rotação da barra de ferramentas ![](orientation.png).
 
 
 |Resultado| Conceito| 
 |---|---|
 | Não executa | 0 |
-| Calcula a distância focal | 0.5 |
-| Segmenta a caixa mostrando contoro e calculando altura | 1.5 |
-| Imprime distância interativamente  na webcam | 2.5 | 
+| Identifica a inclinação e imprime mensagem | 1.25 |
+| Quando inclinado, realiza movimento no sentido a cancelar a inclinação| 2.5 |
+
 
 Casos intermediários ou omissos da rubrica serão decididos pelo professor.
 
@@ -141,39 +163,24 @@ Casos intermediários ou omissos da rubrica serão decididos pelo professor.
 ## Questão 3 - ROS
 
 Faça um programa em ROS que realize as seguintes tarefas:
+* Continuamente monitora o tópico de odometria `/odom`
+* Marca numa imagem a trajetória que o robô segue
 
-* Sorteia um ângulo $\alpha$
+**Atenção:** Seu programa roda em paralelo com o *teleop*, e não deve controlar a posição do robô por si só
 
-* Gira o robô uma magnitude $\alpha$ no sentido horário
+Trabalhe sobre o arquivo `breadcrumbs.py`
 
-* Faz o robô comećar a andar em frente (em suas coordenadas locais)
+Depois de andar um pouco com o robô seu resultado deve ficar parecido com o da figura abaixo:
 
-* Usa a odometria (tópico `\odom`) para deixar o robô imóvel depois que este andou $1.33m$ em relaćão a sua posićào inicial
-
-|Resultado| Conceito| 
-|---|---|
-| Não executa | 0 |
-| Gira alpha no sentido certo | 1.0 |
-|  Recebe odometria | 1.5 |
-| Para após andar | 2.5 | 
-
-
-
-# Questão 4 - ROS + cv
-
-**Atenćão: você vai usar OpenCV mas não vai trabalhar com imagens de câmera**
-
-Você deve trabalhar no arquivo `le_scan_grafico.py`
-
-O que você deve fazer:
-* Leia os dados do *lidar* 
-* Represente o robô na coordenada 256,256 da imagem usando um círculo
-* Adotando a escala $1 pixel = 2 cm$ desenhe todas as leituras válidas do lidar na imagem
-* Traça as retas encontradas usando a transformada de Hough Lines
-
+![](media/demo_odometria.png)
 
 |Resultado| Conceito| 
 |---|---|
 | Não executa | 0 |
-| Desenha os pontos corretamente | 1.5 |
-|  Traça a reta | 2.5 | 
+| Consegue extrair corretamente os dados do tópico de odometria, imprimindo-os | 1.25 |
+| Apresenta o mapa numa imagem quando o robô é pilotado via *teleop* | 2.5 | 
+
+
+**Boa sorte!**
+
+**Não saia sem mostrar o resultado ao professor**
