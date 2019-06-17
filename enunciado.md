@@ -3,10 +3,12 @@
 ## Avaliação Nabla da P1
 
 Observações de avaliações nesta disciplina:
+
 * Esta prova tem 10 pontos, mas seu efeito é de substituir a P1 anterior com no máximo conceito $5.0$
 
 Orientações gerais:
-* Voce tem dois robôs disponíveis. Conte com apenas 20 minutos efetivos de funcionamento ou 30-40 minutos de *standby* para cada robô. Não deixe seu robô ligado sem necessidade
+
+* Você tem dois robôs disponíveis. Conte com apenas 20 minutos efetivos de funcionamento ou 30-40 minutos de *standby* para cada robô. Não deixe seu robô ligado sem necessidade
 * Todas as questões de ROS podem ser feitas com robô real ou simulado
 * As questões de OpenCV podem ser feitas em qualquer sistema operacional, desde que tenham OpenCV 3.4.4
 * Você pode consultar a *Internet* livremente, mas não pode se comunicar com outras pessoas da turma ou de fora dela sobre o conteúdo da prova. Tentativas de comunicação serão severamente punidas.
@@ -33,17 +35,17 @@ O ponto de fuga é aquele para o qual as retas paralelas parecem convergir
 
 Dada a seguinte imagem de um corredor:
 
-![](media/img_hall.png)
+![Imagem do corredor](media/img_hall.png)
 
 Podemos traçar as linhas geradas pela perspectiva, seu ponto de encontro será o ponto de fuga:
 
-![](media/slide_pf_anotado.png)
+![Linhas perspectivas e pontos de fuga](media/slide_pf_anotado.png)
 
 ### Revisão: reta passando por dois pontos
 
-![](media/retas.png)
+![Encontro de duas retas](media/retas.png)
 
-**Nota: Melhor acompanhar esta parte matemática na [versãoo PDF](enunciado.pdf)** 
+**Nota: Melhor acompanhar esta parte matemática na [versão PDF](enunciado.pdf)** 
 
 Seja o ponto $A:(a_x, a_y)$ e o ponto $B:(b_x, b_y)$
 
@@ -96,7 +98,7 @@ q1 = (1.0, 2.4)
 q2 = (0.6, 1.1)
 ```
 
-Encontram-se no ponto `(1.7572815533980581 4.861165048543689)`
+Encontram-se no ponto `(1.7572 4.8611)`
 
 
 Pede-se: 
@@ -109,12 +111,13 @@ A partir do coeficiente angular, selecionar uma reta mais à esquerda e uma mais
 
 Lembre-se de que na OpenCV o eixo y fica **para baixo**, por isso os coeficientes angulares se comportam como na figura abaixo:
 
-<![](media/coeficientes_m.png)
+![Valores de coeficiente angular](media/coeficientes_m.png)
 
 Lembre-se de que, no espaço de cores HSV, o vermelho se encontra no início e no fim da escala do componente H. Se você estiver filtrando vermelho em um só dos extremos pode não ter bons resultados
 
 
 Dicas:
+
 * Lembre-se da aula 2
 * Só precisa funcionar **para este vídeo em particular**, não para qualquer corredor
 * Não é uma questão de ROS. Trabalhe na pasta `q1_opencv`
@@ -137,16 +140,19 @@ Casos intermediários ou omissos da rubrica serão decididos pelo professor.
 
 Vamos trabalhar com o tópico `/imu` , que traz os dados da unidade inercial do robô.
 
-Existe um exemplo em que você pode se basear [neste link https://github.com/Insper/robot19/blob/master/ros/exemplos_python/scripts/le_imu.py)](https://github.com/Insper/robot19/blob/master/ros/exemplos_python/scripts/le_imu.py).
+Existe um exemplo em que você pode se basear [neste link https://github.com/Insper/robot19/blob/master/ros/exemplos_python/scripts/le_imu.py](https://github.com/Insper/robot19/blob/master/ros/exemplos_python/scripts/le_imu.py).
 
 
 ![Eixos do robô](media/eixos_turtle.png)
 
 O que você deve fazer: Um programa que detecta que o robô está sendo inclinado para a frente ou para trás, imprime uma mensagem para alertar e move as rodas para tentar desfazer a inclinação.
 
-**Você deve se basear na medida de giroscópio - ângulos de orientação*. Não use a gravidade. 
+**Você deve se basear na medida de giroscópio - ângulos de orientação**.  Não use a gravidade. 
 
-No simulador, para inclinar o robô use a ferramenta de rotação da barra de ferramentas ![Ferramenta rotation](media/orientation.png).
+No simulador, para inclinar o robô use a ferramenta de rotação da barra de ferramentas
+
+
+![Ferramenta rotation](media/orientation.png)
 
 
 |Resultado| Conceito| 
@@ -163,6 +169,7 @@ Casos intermediários ou omissos da rubrica serão decididos pelo professor.
 ## Questão 3 - ROS
 
 Faça um programa em ROS que realize as seguintes tarefas:
+
 * Continuamente monitora o tópico de odometria `/odom`
 * Marca numa imagem a trajetória que o robô segue
 
