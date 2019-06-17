@@ -33,16 +33,17 @@ O ponto de fuga é aquele para o qual as retas paralelas parecem convergir
 
 Dada a seguinte imagem de um corredor:
 
-<img src=media/img_hall.png width=50%>
+![](media/img_hall.png)
 
 Podemos traçar as linhas geradas pela perspectiva, seu ponto de encontro será o ponto de fuga:
 
-<img src=media/slide_pf_anotado.png width=50%>
-
+![](media/slide_pf_anotado.png)
 
 ### Revisão: reta passando por dois pontos
 
-<img src=media/retas.png width=50%>
+![](media/retas.png)
+
+**Nota: Melhor acompanhar esta parte matemática na [versãoo PDF](enunciado.pdf)** 
 
 Seja o ponto $A:(a_x, a_y)$ e o ponto $B:(b_x, b_y)$
 
@@ -91,7 +92,7 @@ A partir do coeficiente angular, selecionar uma reta mais à esquerda e uma mais
 
 Lembre-se de que na OpenCV o eixo y fica **para baixo**, por isso os coeficientes angulares se comportam como na figura abaixo:
 
-<img src=media/coeficientes_m.png width=75%>
+<![](media/coeficientes_m.png)
 
 Lembre-se de que, no espaço de cores HSV, o vermelho se encontra no início e no fim da escala do componente H. Se você estiver filtrando vermelho em um só dos extremos pode não ter bons resultados
 
