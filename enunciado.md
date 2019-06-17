@@ -1,21 +1,21 @@
 # Robótica Computacional
 
-## Avaliação Delta da P1
+## Avaliação Nabla da P1
 
 Observações de avaliações nesta disciplina:
 * Esta prova tem 10 pontos, mas seu efeito é de substituir a P1 anterior com no máximo conceito $5.0$
 
 Orientações gerais:
 * Voce tem dois robôs disponíveis. Conte com apenas 20 minutos efetivos de funcionamento ou 30-40 minutos de *standby* para cada robô. Não deixe seu robô ligado sem necessidade
-* Todas as questões podem ser feitas com robô real ou simulado
+* Todas as questões de ROS podem ser feitas com robô real ou simulado
+* As questões de OpenCV podem ser feitas em qualquer sistema operacional, desde que tenham OpenCV 3.4.4
 * Você pode consultar a *Internet* livremente, mas não pode se comunicar com outras pessoas da turma ou de fora dela sobre o conteúdo da prova. Tentativas de comunicação serão severamente punidas.
 * Rode o script `apaga_para_entrega.sh` antes de enviar
 * Ao final da prova, compacte a pasta com todo o seu código e envie pelo Blackboard.
 * A responsabilidade por ter o *setup* funcionando é de cada estudante
-* Haverá [uma planilha](https://docs.google.com/spreadsheets/d/1-f1smy-VNqcitWqFRtW1ErIKmvtqAsuE-rtw91epwu0/edit?usp=sharing)  compartilhada com fila para dúvidas. Indique nela se seu problema é de **infra** ou **geral**
+* Haverá [uma planilha](https://docs.google.com/spreadsheets/d/1RTOS66NtEd8PdhTv0O-wmm3N3WhBQXyQx0hY8pWvgog/edit?usp=sharing)  compartilhada com fila para dúvidas. Indique nela se seu problema é de **infra** ou **geral**
 
 Existe algumas dicas de referência rápida de setup [instrucoes_setup.md](instrucoes_setup.md)
-
 
 
 
@@ -24,22 +24,76 @@ Existe algumas dicas de referência rápida de setup [instrucoes_setup.md](instr
 
 ## Questão 1
 
-Você foi contratado para desenvolver um sistema de visão computacional para um robô que vai trabalhar com colheita de toranjas.
+Robôs que trabalham dentro de prédios precisam saber seguir corredores.
 
-O cliente passou a você uma escala de cores que identifica quais toranjas são verdes e quais são maduras.
-
-A linha azul determina a partir de qual cor você pode considerar uma toranja madura
-
-![](escala.png)
-
-Considere que a componente `H` (Hue) das imagens vai definir o critério se uma fruta é madura ou não.
-
-![](prova_laranjas.png)
+Uma das maneiras de fazer isso é o robô alinhar o centro de sua câmera ao ponto de fuga do corredor, para que sua trajetória seja aproximadamente paralela às paredes do mesmo.
 
 
+O ponto de fuga é aquele para o qual as retas paralelas parecem convergir
 
-Pede-se: Faća um código que conte e identifique na  imagem quantas toranjas maduras estão presentes.
+Dada a seguinte imagem de um corredor:
 
+<img src=media/img_hall.png width=50%>
+
+Podemos traçar as linhas geradas pela perspectiva, seu ponto de encontro será o ponto de fuga:
+
+<img src=media/slide_pf_anotado.png width=50%>
+
+
+### Revisão: reta passando por dois pontos
+
+<img src=media/retas.png width=50%>
+
+Seja o ponto $A:(a_x, a_y)$ e o ponto $B:(b_x, b_y)$
+
+Queremos encontrar uma reta $r: y = mx + h$ que passa por $A$ e $B$, em que $m$ é o *coeficiente angular* e $h$ é o intercepto ou coeficiente linear da reta.
+
+Temos que:
+
+$m = \frac{\Delta_y}{\Delta_x} = \frac{b_y - a_y}{b_x - a_x}$
+
+Uma vez encontrado o valor de $m$, a substituição a seguir permite encontrar a equação da reta:
+
+$m = \frac{y - a_y}{x - a_x}$
+
+$mx - ma_x = y - a_y$
+
+$mx = y - a_y + ma_x$
+
+$y = mx -ma_x + a_y$
+
+$h = a_y - ma_x$
+
+
+$y = mx - ma_x + a_y$
+
+### Interseção de duas retas
+
+Temos que na interseção as duas retas se encontram num ponto $(x_i, y_i)$
+
+Sejam as retas $r1: y = m1x + h1$ e $r2: y = m2x + h2$
+
+Vamos encontrar o ponto $x_i$ em que os valores de $y_i$ serão iguais:
+
+$m1x_i + h1 = m2x_i + h2$
+
+$(m1 - m2)x_i = h2 - h1$
+
+$x_i = \frac{h2 - h1}{m1 - m2}$
+
+$y_i = m1x_i + h1$
+
+Pede-se: A partir do ponto para onde convergem as linhas do corredor, marque o ponto de fuga. Você precisa mostrar as retas que vão convergir.
+
+**Sugestão:** 
+
+A partir do coeficiente angular, selecionar uma reta mais à esquerda e uma mais à direita para encontrar a interseção.
+
+Lembre-se de que na OpenCV o eixo y fica **para baixo**, por isso os coeficientes angulares se comportam como na figura abaixo:
+
+<img src=media/coeficientes_m.png width=75%>
+
+Lembre-se de que, no espaço de cores HSV, o vermelho se encontra no início e no fim da escala do componente H. Se você estiver filtrando vermelho em um só dos extremos pode não ter bons resultados
 
 
 Dicas:
