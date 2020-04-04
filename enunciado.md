@@ -1,10 +1,8 @@
 # Robótica Computacional
 
-## Avaliação Nabla da P1
+## Avaliação Nabla (sub)
 
-Observações de avaliações nesta disciplina:
 
-* Esta prova tem 10 pontos, mas seu efeito é de substituir a P1 anterior com no máximo conceito $5.0$
 
 Orientações gerais:
 
