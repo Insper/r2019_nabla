@@ -167,6 +167,11 @@ Casos intermediários ou omissos da rubrica serão decididos pelo professor.
 
 ## Questão 3 - ROS
 
+**Edit: 
+Neste mesmo repo Github há um branch chamado resolucao-miranda com a solução da questão 2 e 3**
+
+A solução funcionando [pode ser vista aqui](https://youtu.be/9YEUiWudyAU)
+
 Faça um programa em ROS que realize as seguintes tarefas:
 
 * Continuamente monitora o tópico de odometria `/odom`
