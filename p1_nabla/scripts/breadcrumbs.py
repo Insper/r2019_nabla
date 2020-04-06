@@ -1,13 +1,20 @@
 #! /usr/bin/env python
 # -*- coding:utf-8 -*-
 
+from __future__ import print_function, division
 import rospy
 import numpy as np
 import cv2
 from geometry_msgs.msg import Twist, Vector3
+from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist, Vector3
 import math
+
+def recebe_odometria(data):
+    x = data.pose.pose.position.x
+    y = data.pose.pose.position.y
+    print("Posicao do robo ", x, " ", y)
 
 
 def desenha(cv_image):
@@ -24,6 +31,8 @@ if __name__=="__main__":
     rospy.init_node("breadcrumbs")
 
     velocidade_saida = rospy.Publisher("/cmd_vel", Twist, queue_size = 3 )
+
+    ref_odometria = rospy.Subscriber("/odom", Odometry, recebe_odometria)
 
 
     cv2.namedWindow("Saida")
