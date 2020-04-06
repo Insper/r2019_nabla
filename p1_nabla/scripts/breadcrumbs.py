@@ -1,6 +1,10 @@
 #! /usr/bin/env python
 # -*- coding:utf-8 -*-
 
+# Veja soluções em:
+# https://youtu.be/9YEUiWudyAU
+
+
 from __future__ import print_function, division
 import rospy
 import numpy as np
@@ -11,20 +15,25 @@ from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist, Vector3
 import math
 
+x = None
+y = None
+
 def recebe_odometria(data):
+    global x
+    global y
+
     x = data.pose.pose.position.x
     y = data.pose.pose.position.y
     print("Posicao do robo ", x, " ", y)
 
 
-def desenha(cv_image):
+def desenha(cv_image, xs, ys):
     """
         Use esta funcão como exemplo de como desenhar na tela
     """
-    cv2.circle(cv_image,(256,256),64,(0,255,0),2)
-    cv2.line(cv_image,(256,256),(400,400),(255,0,0),5)
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    cv2.putText(cv_image,'Boa sorte!',(0,50), font, 2,(255,255,255),2,cv2.LINE_AA)
+    # Usamos a função linha para desenhar um ponto
+    cv2.line(cv_image,(xs-1,ys-1),(xs+1,ys+1),(255,0,0),5)
+
 
 if __name__=="__main__":
 
@@ -41,9 +50,21 @@ if __name__=="__main__":
     # Cria uma imagem 512 x 512
     zero = (256, 256) # ponto considerado ponto zero
 
+    fator = 50
+
+    def escala(x,y):
+        xs = x*fator+zero[0]
+        ys = y*fator+zero[1]
+        return int(xs), int(ys)
+
+
     while not rospy.is_shutdown():
         # Funcão que deve atualizar o desenho com as novas informacos de odometria
-        desenha(branco_bgr)
+        
+        xs, ys = escala(x,y)
+
+        desenha(branco_bgr, xs, ys)
+
         # Imprime a imagem de saida
         cv2.imshow("Saida", branco_bgr)
         cv2.waitKey(40) # Esperar 40 millisegundos
